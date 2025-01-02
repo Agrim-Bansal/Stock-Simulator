@@ -1,0 +1,16 @@
+to start off, I think auth will be it.
+I want to do both of the things - making and using accounts saved in my own db. as well as oauth with google...
+
+but i think i'll implement them later and just let variables work for the beginning.
+IG I'll use shadcn for the ui, that seemed quite nice. So let it roll..
+https://ui.shadcn.com
+https://ui.shadcn.com/docs
+
+I'm thinking coolors.co for a color pallete although i do like the black-white theme default for shadcn/ui
+
+I found ready made login page on shadcn/ui so i'm just gonna put that and get done with it.
+
+I'm kinda stuck at checking if logged in or not. I thought about using state for that and router.push to /login page but that is throwing an error and that might cause a problem.
+solved it. I just needed to forgo the state and redirect from within the useEffect function.
+
+Okay, so the password workflow seems really complicated to build and implement. therefore, I am going to put that off and instead, start off with the actual stock simulator platform
