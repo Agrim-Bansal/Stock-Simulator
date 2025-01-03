@@ -1,8 +1,6 @@
 // import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect} from 'firebase/auth';
 import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 import {initializeApp} from 'firebase/app';
-import type { NextApiRequest, NextApiResponse } from 'next'
-
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

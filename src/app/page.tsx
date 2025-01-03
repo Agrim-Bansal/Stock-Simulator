@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import '@/lib/auth';
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(undefined);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(), async (user) => {
