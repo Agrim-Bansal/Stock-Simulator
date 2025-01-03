@@ -1,23 +1,30 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { ChartCandlestick } from "lucide-react";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import '@/lib/auth';
 
 export default function Home() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(undefined);
 
   useEffect(() => {
-    sessionStorage.setItem("user", "bhg");
-    if (typeof window !== "undefined" && sessionStorage.getItem("user") == '') {
-      router.push("/login")
-    }
+    const unsubscribe = onAuthStateChanged(getAuth(), async (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
+  if (isLoggedIn === undefined) {
+    return <div>Loading...</div>;}
+  else if(isLoggedIn == true){
+    window.location.href = '/dashboard';
+  }else{
+    window.location.href = '/login';
+  }
 
-  return (
-    <>
-    <ChartCandlestick size={32} color="white"/>
-     <div className="text-xl">Stock Simulator</div>    
-</>
-  )};
+  
+  };

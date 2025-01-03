@@ -14,3 +14,13 @@ I'm kinda stuck at checking if logged in or not. I thought about using state for
 solved it. I just needed to forgo the state and redirect from within the useEffect function.
 
 Okay, so the password workflow seems really complicated to build and implement. therefore, I am going to put that off and instead, start off with the actual stock simulator platform
+
+Yesterday I finished off with the sidebar save a little bit of fine tuning. Now I'm a bit confused with the structuring of data which is compatible with authentication. So, what i'm thinking is maybe i'll go and implement auth first.
+Now for auth I am confused as to firebase or auth0 but since i'm going with firestore, so ig i'll just go ahead with firebase.
+
+export default function handler(req, res) {
+  res.status(200).json({ message: 'Hello from Next.js!' })
+}
+handling of https reequest - apis in nextjs
+
+I kinda implemented the sign in and sign up with nextjs api ig. I'm not sure how that'll work. I'll see if i move it over to the login page itself.

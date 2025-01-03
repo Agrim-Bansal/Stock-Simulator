@@ -20,7 +20,7 @@ import Link from "next/link"
             <SidebarGroup>
             <SidebarMenu>
                 <SidebarMenuButton asChild>
-                    <Link className="text-xl" href="#">
+                    <Link className="text-xl" href="/">
                     <ChartCandlestick size={32} color="white"/>
                     Stock Simulator
                     </Link>
@@ -36,7 +36,7 @@ import Link from "next/link"
             <SidebarMenu>
 
                 <SidebarMenuButton asChild>
-                <Link href="/"><Home/> Portfolio</Link>
+                <Link href="/dashboard"><Home/> Portfolio</Link>
                 </SidebarMenuButton> 
 
                 <SidebarMenuButton asChild>
@@ -58,9 +58,9 @@ import Link from "next/link"
         </SidebarContent>
 
 
-        <SidebarFooter className='flex flex-col items-center justify-between'>
+        <SidebarFooter className='flex flex-col items-center justify-between '>
             <SidebarMenuButton asChild>
-            <Link href="/account" className="flex items-center justify-evenly w-full">
+            <Link href="/account" className="flex items-center w-full text-lg">
             <User/>
             Account
             </Link>
