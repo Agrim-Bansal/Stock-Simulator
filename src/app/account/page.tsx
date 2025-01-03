@@ -1,9 +1,14 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import '@/lib/auth';
-import {getAuth} from 'firebase/auth';
+import {getAuth, onAuthStateChanged, User} from 'firebase/auth';
+import { Button } from "@/components/ui/button";
+import { logout } from "@/lib/auth";
+import Link from "next/link";
 
 export default function Home() {
+
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
 
@@ -15,25 +20,37 @@ export default function Home() {
       console.log("User is not signed in.");
     }
   }
-
-    checkUser();
+  checkUser();
 
   }, );
+
+  onAuthStateChanged(getAuth(), (user)=>{
+
+    async function userChanger(user:User){
+      setUser(user);
+    }
+
+    userChanger(user!);
+
+  })
 
 
   if (getAuth().currentUser){   
     return (
-      <>
-      Stock Simulator
-      {getAuth().currentUser!.displayName}
-    </>
+      <div>
+      Stock Simulator 
+      {user!.displayName}
+      <Button onClick={logout}>SignOut</Button>
+    </div>
   )} else {
     return (
-      <>
+      <div>
       Stock Simulator.
-      <a href="/login">
+      <Button>
+      <Link href="/login">
       Sign In to continue.
-      </a>
-    </>
+      </Link>
+      </Button>
+    </div>
   )}
 }

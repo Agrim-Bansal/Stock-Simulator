@@ -1,5 +1,5 @@
 // import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect} from 'firebase/auth';
-import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, updateProfile, sendEmailVerification} from 'firebase/auth';
 import {initializeApp} from 'firebase/app';
 
 // Your web app's Firebase configuration
@@ -17,29 +17,33 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-export async function login(email:string, password:string){
+export async function login(email:string, password:string) : Promise<string> {
 
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        return ({user : userCredential.user});
+    const result = await signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+        return ('ok');
     })
     .catch((error) => {
-        const errorMessage = error.message;
-        return ({error: errorMessage});
+        return (error.code);
     });
+
+    return result;
+
 }
 
-export async function signup(email:string, password:string){
+export async function signup(email:string, password:string, name:string) : Promise<string>{
 
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        return {status:200, user : userCredential.user};
+    const result = createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+        sendEmailVerification(auth.currentUser!);
+        updateProfile(auth.currentUser!, {displayName : name});
+        return ('ok');
     })
     .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        return {status:errorCode,error: errorMessage};
+        return (error.code);
     });
+
+    return result;
 
 }
 
@@ -59,6 +63,12 @@ export async function googleLogin(){
 
         return({status:errorCode, error:errorMessage});
       });
-    
-    
+}
+
+export async function logout(){
+    signOut(auth).then(() => {
+        return({status:200});
+      }).catch((error) => {
+        return({status:500, error:error});
+      });
 }
