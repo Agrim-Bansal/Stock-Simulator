@@ -24,3 +24,23 @@ export default function handler(req, res) {
 handling of https reequest - apis in nextjs
 
 I kinda implemented the sign in and sign up with nextjs api ig. I'm not sure how that'll work. I'll see if i move it over to the login page itself.
+
+Yaay. I'm done with authentication completely although a little stuff is left to implement on the account page 
+- reset password, delete account, change email and also to setup a forgot password page.
+
+Currently I think i will just make the research page with the following abilities and features :
+- trending stocks carousel, a table with a list of popular stocks, a search option.
+
+It is getting difficult to get a chart for the trending stocks carousel, and i need to design the search box part, the table is also wierd
+
+Ig I'll work on the other pages first then.
+Starting off with Account page - this has no relation to stocks and should be good enough to implement.
+just diplay email, name and have an option to change password and delete account.
+Also make a forgot password page accessible via link.
+
+remember todo 
+copy layout file from account page to all the other ones
+
+ok. so i have set up the popular tickers although those are selected manually and fetched everytime. that is definitely going to run out of quota from the api. so Ig i'll store them in my own database for each day and fetch from there.
+also i am actively looking for another api for the stocks. the one for logo is good though.
+and i did make logging in good enough if not logged in on the account page. although account page itself for logged in users is left to be done.

@@ -5,6 +5,7 @@ import {getAuth, onAuthStateChanged, User} from 'firebase/auth';
 import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/auth";
 import Link from "next/link";
+import {UserIcon} from "lucide-react" ;
 
 export default function Home() {
 
@@ -44,8 +45,8 @@ export default function Home() {
     </div>
   )} else {
     return (
-      <div>
-      Stock Simulator.
+      <div className="flex flex-col items-center justify-center h-full w-full">
+      <UserIcon size="128" color="white"/>
       <Button>
       <Link href="/login">
       Sign In to continue.

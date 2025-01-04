@@ -19,12 +19,17 @@ export default function Home() {
   }, []);
 
   if (isLoggedIn === undefined) {
-    return <div>Loading...</div>;}
+    return (
+      <div className="loader-container flex justify-center items-center h-screen w-full">
+        <div className="loader">Loading...</div>
+      </div>
+  )}
   else if(isLoggedIn == true){
     window.location.href = '/dashboard';
   }else{
     window.location.href = '/login';
   }
 
+  
   
   };
