@@ -1,5 +1,5 @@
 // import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect} from 'firebase/auth';
-import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, updateProfile, sendEmailVerification} from 'firebase/auth';
+import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, updateProfile, sendEmailVerification, reauthenticateWithPopup} from 'firebase/auth';
 import {initializeApp} from 'firebase/app';
 
 // Your web app's Firebase configuration
@@ -71,4 +71,25 @@ export async function logout(){
       }).catch((error) => {
         return({status:500, error:error});
       });
+}
+
+export async function reauth(){
+    const user = auth.currentUser;
+
+    if(user?.providerId == 'google.com'){
+        const provider = new GoogleAuthProvider();
+
+        reauthenticateWithPopup(user, provider)
+        .then(() => {
+            return({status:200});
+        })
+        .catch((error) => {
+            return({status:500, error:error});
+        });
+    }else{
+
+        
+
+    }
+    
 }
