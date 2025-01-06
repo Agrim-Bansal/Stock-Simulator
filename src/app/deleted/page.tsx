@@ -1,13 +1,13 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { CircleX, Trash } from "lucide-react";
+import { Suspense } from "react";
 
-export default function Deleted() {
+function Deleted() {
+
     const searchParams = useSearchParams();
 
-    const status = searchParams!.get('status');
-
-    if(status == 'success'){
+    if(searchParams?.get('status') == 'success'){
         return (
         <div className="flex flex-col items-center justify-center h-screen w-full">
             
@@ -31,3 +31,11 @@ export default function Deleted() {
         </div>
     )
 }
+
+export default function DeletedPage(){
+    return (
+        <Suspense>
+            <Deleted/>
+        </Suspense>
+    )
+};
