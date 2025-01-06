@@ -21,7 +21,7 @@ export default function Home() {
   if (isLoggedIn === undefined) {
     return (
       <div className="loader-container flex justify-center items-center h-screen w-full">
-        <div className="loader">Loading...</div>
+        <div className="loader"></div>
       </div>
   )}
   else if(isLoggedIn == true){

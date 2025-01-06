@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useRouter } from "next/navigation";
 
+
 const roboto = Roboto({
   subsets: ['latin'],
   weight: "400",
@@ -57,18 +58,14 @@ export default function Home() {
   })
 
   function confirmHandler(){
-
-    if(change == 'password'){
-      console.log("User has confirmed password change.");
-    }else if(change == 'delete'){
-      console.log("User has confirmed account deletion.");
-
-      if(user?.providerData[0].providerId == 'google.com'){
+    if(user?.providerData[0].providerId == 'google.com'){
+     if(change == 'delete'){
+      
         reauthenticateWithPopup(user, new GoogleAuthProvider())
         .then(() => {
           deleteUser(user!).then(() => {
             console.log("User deleted successfully.");
-            router.push('/account/deleted');
+            router.push('/deleted?status=success');
           }).catch((error) => {
             prompt("Error deleting user: ", error);
             console.log("Error deleting user: ", error);
@@ -77,12 +74,18 @@ export default function Home() {
           prompt("Error reauthenticating user: ", error);
           console.log("Error reauthenticating user: ", error);
         });
-      }else{
-        router.push('/account/reauthenticate?q=delete');
+      }}
+
+      else{
+        if(change == 'delete'){
+          router.push('/reauthenticate');
+        }else if(change == 'password'){
+          router.push('');
       }
     }
 
   };
+
 
   function cancelHandler(){
     setChange('');
@@ -90,7 +93,7 @@ export default function Home() {
 
   function confirmationMessage(){
     if(change == 'password'){
-      return 'Are you sure? You will need to reauthenticate to change your password.';
+      return 'Are you sure you want to reset the password ?';
     }
     if(change == 'delete'){
       return 'Are you sure? This action is irreversible';
@@ -121,7 +124,7 @@ export default function Home() {
           <div>Name</div>
 
           {nameEditable ?
-              <input defaultValue={user?.displayName + ''} className="bg-transparent w-max focus:outline-none px-5" onBlur={changeName}></input>
+              <input defaultValue={user?.displayName + ''} className="bg-transparent w-max focus:outline-none px-5" onBlur={changeName} autoFocus></input>
               :
               <div className="px-5">{user?.displayName}</div>
           }

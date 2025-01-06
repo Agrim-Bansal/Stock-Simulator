@@ -86,10 +86,6 @@ export async function reauth(){
         .catch((error) => {
             return({status:500, error:error});
         });
-    }else{
-
-        
-
     }
     
 }
