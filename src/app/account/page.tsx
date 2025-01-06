@@ -66,7 +66,7 @@ export default function Home() {
         if(change == 'delete'){
           router.push('/reauthenticate');
         }else if(change == 'password'){
-          router.push('');
+          router.push('/pwdreset');
       }
     }
 
