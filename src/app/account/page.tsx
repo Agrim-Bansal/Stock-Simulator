@@ -1,6 +1,6 @@
 "use client";
 import {Roboto} from "next/font/google"
-import { useEffect, useState } from "react";
+import {useState} from "react";
 import '@/lib/auth';
 import {getAuth, onAuthStateChanged, reauthenticateWithPopup, User, GoogleAuthProvider, updateProfile, deleteUser} from 'firebase/auth';
 import { Button } from "@/components/ui/button";
@@ -33,20 +33,6 @@ export default function Home() {
   const [change, setChange] = useState<string>();
   const [nameEditable, setNameEditable] = useState<boolean>(false);
 
-  useEffect(() => {
-
-    async function checkUser() {
-    const user = await getAuth().currentUser;
-    if (user) {
-      console.log("User is signed in.");
-    }else{
-      console.log("User is not signed in.");
-    }
-  }
-  checkUser();
-
-  }, );
-
   onAuthStateChanged(getAuth(), (user)=>{
 
     async function userChanger(user:User){
@@ -64,15 +50,15 @@ export default function Home() {
         reauthenticateWithPopup(user, new GoogleAuthProvider())
         .then(() => {
           deleteUser(user!).then(() => {
-            console.log("User deleted successfully.");
+
             router.push('/deleted?status=success');
           }).catch((error) => {
             prompt("Error deleting user: ", error);
-            console.log("Error deleting user: ", error);
+
           });
         }).catch((error) => {
           prompt("Error reauthenticating user: ", error);
-          console.log("Error reauthenticating user: ", error);
+
         });
       }}
 
@@ -103,7 +89,6 @@ export default function Home() {
   function changeName(e:React.ChangeEvent<HTMLInputElement>){
     const newName = e.target.value;
     updateProfile(getAuth().currentUser!, {displayName: newName}).then(() => {
-      console.log("Name updated to: ", newName);
       setNameEditable(false);
     }).catch((error) => {
       console.log("Error updating name: ", error);
