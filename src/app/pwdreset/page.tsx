@@ -34,22 +34,21 @@ function Reset() {
   async function submitHandler(){
     const password = document.getElementById('oldPassword') as HTMLInputElement;
     const credential = EmailAuthProvider.credential(getAuth().currentUser!.email!, password.value);
-    const newPassword = document.getElementById('newPassword') as HTMLInputElement;
-    const confirmPassword = document.getElementById('confirmPassword') as HTMLInputElement;
+    const newPassword = (document.getElementById('newPassword') as HTMLInputElement).value;
+    const confirmPassword = (document.getElementById('confirmPassword') as HTMLInputElement).value;
 
-    if(newPassword.value != confirmPassword.value){
+    if(newPassword != confirmPassword){
         setMessage("Passwords do not match");
         return;
     }
 
     reauthenticateWithCredential(getAuth().currentUser!, credential)
     .then(() => {
-            updatePassword(getAuth().currentUser!, newPassword.value ).then(() => {
+            updatePassword(getAuth().currentUser!, newPassword ).then(() => {
             router.push("/account");
         }).catch((error) => {
             setMessage(error.message);
         });
-
     }).catch((error) => {
       setMessage(error.message);
     });
