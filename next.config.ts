@@ -11,6 +11,20 @@ const nextConfig: NextConfig = {
         pathname: '**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'static2.finnhub.io',
+        port: '',
+        pathname: '**',
+        search: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.finnhub.io',
+        port: '',
+        pathname: '**',
+        search: '',
+      },
     ],
   },
 };

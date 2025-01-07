@@ -11,6 +11,8 @@ export default function Home() {
   // const router = useRouter();
   // const [stocks, setStocks] = useState<{name: string, symbol: string, price: string, change: string, logo: string}[]>([{name: 'Apple', symbol: 'APL', price: '0', change: '0', logo: 'https://api-ninjas-data.s3.us-west-2.amazonaws.com/logos/l476432a3e85a0aa21c23f5abd2975a89b6820d63.png'}]);
   const [stocks, setStocks] = useState<{name: string, symbol: string, price: string, change: string, logo: string}[]>([]);
+  const [activeTicker, setActiveTicker] = useState<string>('');
+
   useEffect(() => {
 
     setCommonStocks();
@@ -31,10 +33,9 @@ export default function Home() {
     
     <PopularStocksCarousel stocks={stocks} /> 
 
-    <StockTable />
+    <StockTable setActiveTicker={(ticker:string) => setActiveTicker(ticker)}/>
 
     </>
-
 
     
   )};

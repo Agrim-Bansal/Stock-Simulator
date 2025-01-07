@@ -44,3 +44,28 @@ copy layout file from account page to all the other ones
 ok. so i have set up the popular tickers although those are selected manually and fetched everytime. that is definitely going to run out of quota from the api. so Ig i'll store them in my own database for each day and fetch from there.
 also i am actively looking for another api for the stocks. the one for logo is good though.
 and i did make logging in good enough if not logged in on the account page. although account page itself for logged in users is left to be done.
+
+---------------------------------
+
+it's been a long time since my last update and whatever ...
+At this point I have implemented all of the account functions - page / info display / reset password / forgot password / update name and stuff /  
+and am at the stage of focusing on the stocks part going forward. There's been some issues like wrapping useSearchParams in a suspense element, typescript has been a pain, and umm.. a bit of figuring out which part evaluates and when.
+onwards, i need to implement the table for all tickers. 
+a popup containing the stock info . -- this all on the research page.
+
+portfolio / trade / watchlist are still to be implemented.
+
+but ig they'll all start to fall into place once I do find a god damn api. It's been a huge problem finding a good enough api for the information.
+
+alphavantage seemed to be perfect but it has got a really constricted request limit.
+api ninja just doesn't have all the info but could help reduce the load from alphavantage. so i'm holding on.
+and finnhub also doesn't have historical data. 
+Alpaca api seems a good candidate for the api with 200req/minutes.
+
+-----------------------------------
+
+Well, I had to write a script to get the data i need in the format i need as the apis were simply not cutting it. Now it is collecting the data and savinig into excel which i'll convert to json and work with.
+
+yay, I've completed the data table. although prices need to be fed in, but that's alright.
+
+and now trading, watchlist and portfolio need to be done. 
