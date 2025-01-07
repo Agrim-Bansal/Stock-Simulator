@@ -68,4 +68,10 @@ Well, I had to write a script to get the data i need in the format i need as the
 
 yay, I've completed the data table. although prices need to be fed in, but that's alright.
 
-and now trading, watchlist and portfolio need to be done. 
+and now trading, watchlist and portfolio need to be done. these and prices, umm yeah- active ticker - like a popup.
+
+I can foresee the designing is going to be problematic and for graphs, I am most probably going to use chatjs library and plot the graphs.
+and like in the inspiration, I might want to add the ummmmmmm..... yeah, the label following the mouse on chart displaying price corresponding to dates and time but seems difficult.
+also i need to figure the data structure for the transactions.
+It seems a collection within a collection is not allowed. i was banking on transations > userID > trades and sim for watchlist
+so it seems as if i should go transactions-<userID> > trades . meh. will figure it out. 

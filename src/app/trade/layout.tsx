@@ -23,14 +23,13 @@ export default async function RootLayout({children,}: Readonly<{children: React.
         <AppSidebar />
 
         <SidebarInset >  
-        
 
         <SidebarTrigger className="fixed z-10"/>
         
-        <div className="header text-center fixed border-b-2 border-gray-200 bg-black space-y-2">
-          <h1 className="text-4xl">StockMarket Simulator</h1>
-          <p className="text-gray-500">A platform to try and experience the stock market - risk free.</p>
-        </div>
+        {/* <div className="text-center fixed border-b-2 border-gray-200 bg-black w-full space-y-2"> */}
+          <div className="text-4xl w-full text-center mt-10">StockMarket Simulator</div>
+          <p className="text-gray-500 w-full text-center mb-10">A platform to try and experience the stock market - risk free.</p>
+        {/* </div> */}
         
         {children}
         

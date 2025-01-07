@@ -4,8 +4,7 @@ import '@/lib/auth';
 import { Quicksand } from "next/font/google";
 
 const quickSand = Quicksand({
-  weights: [300, 400, 500, 600, 700],
-  styles: ["italic", "normal"],
+  weight: ['300', '400', '500', '600', '700'],
   display: "swap",
   subsets: ["latin"],
 });

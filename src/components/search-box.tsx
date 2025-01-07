@@ -33,9 +33,9 @@ export default function SearchBox({className, setActiveTicker}: {className?: str
             </div>
 
             { showOptions &&
-                <div className="search-results bg-zinc-950 w-256 h-64 overflow-y-scroll px-24 pt-5 pb-8 text-xl absolute top-52">
+                <div className="search-results bg-zinc-950 w-256 h-64 overflow-y-scroll px-24 pt-5 pb-8 text-xl absolute top-52 ">
                     {options?.map((option, index) => (
-                        <div key={index} className="search-result border-b-4" onClick={() => setActiveTicker!(option.displaySymbol)}  >
+                        <div key={index} className="search-result border-b-4 cursor-pointer" onClick={() => setActiveTicker!(option.displaySymbol)}  >
                             <div>{option.description}</div>
                             <div className="text-gray-500">({option.displaySymbol})</div>
                         </div>
