@@ -12,7 +12,6 @@ export default function Home() {
   // const router = useRouter();
   // const [stocks, setStocks] = useState<{name: string, symbol: string, price: string, change: string, logo: string}[]>([{name: 'Apple', symbol: 'APL', price: '0', change: '0', logo: 'https://api-ninjas-data.s3.us-west-2.amazonaws.com/logos/l476432a3e85a0aa21c23f5abd2975a89b6820d63.png'}]);
   const [stocks, setStocks] = useState<{name: string, symbol: string, price: string, change: string, logo: string}[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTicker, setActiveTicker] = useState<string>('');
 
   useEffect(() => {
