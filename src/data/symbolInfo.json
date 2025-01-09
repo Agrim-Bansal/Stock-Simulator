@@ -1,13 +1,5 @@
 [
     {
-        "symbol": "DUO",
-        "logoUrl": "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/950715025486.png",
-        "name": "Fangdd Network Group Ltd",
-        "marketCap": 22402.6,
-        "volume": 179133.06,
-        "industry": "Media"
-    },
-    {
         "symbol": "NVDA",
         "logoUrl": "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/NVDA.png",
         "name": "NVIDIA Corp",

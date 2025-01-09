@@ -27,7 +27,7 @@ export default function StockInfoBox({ticker} : {ticker:string}) {
 
 
     return (
-        <div className={`stock-info-box ${isActive ? 'visible' : 'hidden'} h-screen w-full fixed z-10 flex backdrop-blur-sm`}>
+        <div className={`stock-info-box ${isActive ? 'visible' : 'hidden'} h-screen w-full fixed z-10 flex backdrop-blur-sm left-0`}>
             <div className='flex flex-col w-256 mx-auto my-10 bg-black justify-between p-5 rounded-lg border border-white'>
 
             <div className='flex flex m-2 items-center w-full justify-center '>

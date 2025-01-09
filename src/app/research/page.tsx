@@ -37,7 +37,7 @@ export default function Home() {
 
     <StockTable setActiveTicker={(ticker:string) => setActiveTicker(ticker)}/>
 
-    <StockInfoBox ticker={activeTicker} key={activeTicker}/>
+    <StockInfoBox ticker={activeTicker} key={activeTicker} />
 
     </>
 
