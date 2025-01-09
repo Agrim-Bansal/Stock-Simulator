@@ -75,3 +75,11 @@ and like in the inspiration, I might want to add the ummmmmmm..... yeah, the lab
 also i need to figure the data structure for the transactions.
 It seems a collection within a collection is not allowed. i was banking on transations > userID > trades and sim for watchlist
 so it seems as if i should go transactions-<userID> > trades . meh. will figure it out. 
+
+----------------------------------------
+
+today, i believe that what has to happen will find its way. By total chance, i attended a trading workshop and discovered trading view.
+I think it will completely totally handle my graphing problem by embedding a chart and just being done with it.
+I'll do that tomorrow though. 
+
+-----------------------------------------

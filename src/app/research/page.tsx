@@ -5,6 +5,7 @@ import SearchBox from "@/components/search-box";
 import PopularStocksCarousel from "@/components/popular-stocks-carousel";
 import { commonStocks } from "@/pages/api/stocks";
 import StockTable from "@/components/stock-table";
+import StockInfoBox from "@/components/stock-info-box";
 
 export default function Home() {
   // const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -30,11 +31,13 @@ export default function Home() {
 
     <>
 
-    <SearchBox className="search-box" />
+    <SearchBox className="search-box" setActiveTicker={(ticker:string) => setActiveTicker(ticker)} />
     
-    <PopularStocksCarousel stocks={stocks} /> 
+    <PopularStocksCarousel stocks={stocks} setActiveTicker={(ticker:string) => setActiveTicker(ticker)}/> 
 
     <StockTable setActiveTicker={(ticker:string) => setActiveTicker(ticker)}/>
+
+    <StockInfoBox ticker={activeTicker} key={activeTicker}/>
 
     </>
 

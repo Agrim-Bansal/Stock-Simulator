@@ -67,7 +67,8 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
 	width: {
-		'256': '68rem'
+		'256': '68rem',
+		'128': '34rem'
 	}
   	}
   },

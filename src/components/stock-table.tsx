@@ -40,7 +40,6 @@ export default function StockTable({setActiveTicker}:{setActiveTicker:Function})
                 </div>
 
                 <div className="flex-group overflow-y-auto h-96 text-lg">
-                    {/* <TableRow symbol="APL" logo="logo" name="Apple" price={10} change={0} marketCap={0} volume={0} industry="Tech"/> */}
                     {
                         symbolInfo.map((stock, index) => {
                             return <TableRow symbol={stock.symbol} logo={stock.logoUrl!} name={stock.name} price={0} change={0} marketCap={parseInt(`${stock.marketCap}`) } volume={stock.volume} industry={stock.industry!} key={index} index={index} onClick={()=>setActiveTicker(stock.symbol)}/>

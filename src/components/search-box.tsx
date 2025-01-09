@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
 import { stockLookup } from "@/pages/api/stocks";
 import { useState } from "react";
 
-export default function SearchBox({className, setActiveTicker}: {className?: string, setActiveTicker?: Dispatch<SetStateAction<string>>}) {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+export default function SearchBox({className, setActiveTicker}: {className?: string, setActiveTicker: Function}) {
 
     const [options, setOptions] = useState<{description: string, displaySymbol: string, symbol: string, type:string}[]>();
     const [showOptions, setShowOptions] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export default function SearchBox({className, setActiveTicker}: {className?: str
             { showOptions &&
                 <div className="search-results bg-zinc-950 w-256 h-64 overflow-y-scroll px-24 pt-5 pb-8 text-xl absolute top-52 ">
                     {options?.map((option, index) => (
-                        <div key={index} className="search-result border-b-4 cursor-pointer" onClick={() => setActiveTicker!(option.displaySymbol)}  >
+                        <div key={index} className="search-result border-b-4 cursor-pointer" onClick={() => setActiveTicker(option.displaySymbol)}  >
                             <div>{option.description}</div>
                             <div className="text-gray-500">({option.displaySymbol})</div>
                         </div>

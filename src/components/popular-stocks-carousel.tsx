@@ -2,7 +2,8 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 
-export default function PopularStocksCarousel({stocks}:{stocks: {name: string, symbol: string, price: string, change: string, logo: string}[], }) {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+export default function PopularStocksCarousel({stocks, setActiveTicker}:{stocks: {name: string, symbol: string, price: string, change: string, logo: string}[], setActiveTicker:Function}) {
 
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -24,7 +25,7 @@ export default function PopularStocksCarousel({stocks}:{stocks: {name: string, s
                 </div>
                 :
                 (stocks.length) && stocks.map((stock, index) => (
-                    <Card className="stock p-5 m-5 w-200 flex-col justify-center items-center cursor-pointer" key={index} style={{flex: '0 0 20%'}}>
+                    <Card className="stock p-5 m-5 w-200 flex-col justify-center items-center cursor-pointer" key={index} style={{flex: '0 0 20%'}} onClick={() => setActiveTicker(stock.symbol)}>
                         <div className="flex items-center justify-center">
                             <Image src={stock.logo} alt={stock.name}  width='50' height='50' className="mr-10"/>
                             <div>
