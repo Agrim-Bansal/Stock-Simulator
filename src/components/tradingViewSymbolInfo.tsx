@@ -6,24 +6,16 @@ function TradingViewWidget({ticker} : {ticker:string}) {
   useEffect(
     () => {
       const script = document.createElement("script");
-      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js";
       script.type = "text/javascript";
       script.async = true;
       script.innerHTML = `
         {
-          "autosize": true,
           "symbol": "${ticker}",
-          "interval": "D",
-          "timezone": "Etc/UTC",
-          "theme": "dark",
-          "style": "3",
-          "backgroundColor": "rgba(0, 0, 0, 1)",
-          "locale": "en",
-          "allow_symbol_change": true,
-          "calendar": false,
-          "support_host": "https://www.tradingview.com",
           "width": "100%",
-          "height": "100%"
+          "locale": "en",
+          "colorTheme": "dark",
+          "isTransparent": true
         }`;
         
       document.getElementsByClassName("tradingview-widget-container__widget")[0].appendChild(script);
@@ -38,10 +30,13 @@ function TradingViewWidget({ticker} : {ticker:string}) {
   );
 
   return (
-    <div className="tradingview-widget-container" style={{ height: "100%", width: "100%" }}>
-      <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
+    <div className="tradingview-widget-container h-full w-full">
+      <div className="tradingview-widget-container__widget h-full w-full"></div>
     </div>
   );
 }
 
 export default (TradingViewWidget);
+
+
+
