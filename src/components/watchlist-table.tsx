@@ -20,7 +20,7 @@ function TableRow(stock:{symbol:string, logo:string, name:string, price:string, 
             <div className={`basis-1/4 font-light flex items-center justify-center ${change>=0? 'text-green-400' : 'text-red-400'}`} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             
             }
-            <div className={`basis-1/4 font-light flex items-center justify-center ${change>=0? 'text-green-400' : 'text-red-400'}`} >{change/parseFloat(stock.markedPrice) * 100}%</div>
+            <div className={`basis-1/4 font-light flex items-center justify-center ${change>=0? 'text-green-400' : 'text-red-400'}`} >{(change/parseFloat(stock.markedPrice) * 100).toFixed(2)}%</div>
             <div className="basis-1/4 font-light flex items-center justify-center"> 
             <button className='bg-destructive text-destructive-foreground rounded-lg p-2 m-1' onClick={() => stock.onClick()}>Delete</button> 
             <Link href={`/trade?ticker=${stock.symbol}`}><button className='bg-primary text-primary-foreground rounded-lg p-2 m-1'>Trade</button> </Link>

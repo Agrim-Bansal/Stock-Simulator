@@ -12,7 +12,7 @@ function TableRow(stock:{symbol:string, logo:string, name:string, price:number, 
             <div className="basis-1/6 font-normal flex items-center justify-center">{stock.symbol}</div>
             <div className={`basis-1/6 font-light flex items-center justify-center`} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             <div className={`basis-1/6 font-light flex items-center justify-center ${stock.change>0? 'text-green-400' : 'text-red-400'}`} > {stock.change} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
-            <div className={`basis-1/6 font-light flex items-center justify-center ${stock.change>0? 'text-green-400' : 'text-red-400'}`} >{stock.change/stock.price}%</div>
+            <div className={`basis-1/6 font-light flex items-center justify-center ${stock.change>0? 'text-green-400' : 'text-red-400'}`} >{(stock.change/stock.price).toFixed(2)}%</div>
             <div className="basis-1/6 font-normal flex items-center justify-center" >{stock.volume}M</div>
             <div className="basis-1/6 font-normal flex items-center justify-center" >{stock.marketCap}M</div>
             <div className="basis-1/6 font-semibold flex items-center justify-center text-sm">{stock.industry}</div> 
@@ -42,7 +42,7 @@ export default function StockTable({setActiveTicker}:{setActiveTicker:Function})
                 <div className="flex-group overflow-y-auto h-96 text-lg">
                     {
                         symbolInfo.map((stock, index) => {
-                            return <TableRow symbol={stock.symbol} logo={stock.logoUrl!} name={stock.name} price={0} change={0} marketCap={parseInt(`${stock.marketCap}`) } volume={stock.volume} industry={stock.industry!} key={index} index={index} onClick={()=>setActiveTicker(stock.symbol)}/>
+                            return <TableRow symbol={stock.symbol} logo={stock.logoUrl!} name={stock.name} price={parseFloat(stock.price.toFixed(2))} change={parseFloat(stock.change.toFixed(2))} marketCap={parseInt(`${stock.marketCap}`) } volume={stock.volume} industry={stock.industry!} key={index} index={index} onClick={()=>setActiveTicker(stock.symbol)}/>
                         })
                     }
                 </div>

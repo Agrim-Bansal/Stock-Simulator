@@ -23,12 +23,12 @@ API_KEY = os.environ.get('FINNHUB_API_KEY')
 #     return data
 
 def get_data(symbol):
-    url = f'https://finnhub.io/api/v1/stock//quote?symbol={symbol}'
+    url = f'https://finnhub.io/api/v1/quote?symbol={symbol}'
 
     response = requests.get(url, headers={'X-Finnhub-Token': API_KEY})
     
-
     data = response.json()
+
     return [data['c'], data['c'] - data['pc']]
 
 
@@ -64,8 +64,11 @@ symbolInfo = pd.DataFrame(columns=['symbol', 'logoUrl', 'name', 'marketCap', 'vo
 # print(symbolList['symbol'][2750])
 
 
+
 for index, row in symbolList.iterrows():
     try:
+        print(f'Getting data for {row["symbol"]}')
+
         data = get_data(row['symbol'])
 
         newData = {
@@ -81,13 +84,13 @@ for index, row in symbolList.iterrows():
         symbolInfo = pd.concat([symbolInfo, pd.DataFrame([newData])], ignore_index=True)
         time.sleep(1)
         symbolInfo.to_excel('./src/data/symbolInfo.xlsx', index=False)
-        symbolInfo.to_json('./src/data/symbolInfo.json')
+        symbolInfo.to_json('./src/data/symbolInfo.json', orient='records')
     except KeyboardInterrupt:
         break
     except Exception as e:
-        print(f'Error in getting data for {symbol} : {e}')
+        print(f'Error in getting data for {row["symbol"]} : {e}')
 else:
     symbolInfo.to_excel('./src/data/symbolInfo.xlsx', index=False)
-    symbolInfo.to_json('./src/data/symbolInfo.json')
+    symbolInfo.to_json('./src/data/symbolInfo.json', orient='records')
     print('Data Collection Done!')
     
