@@ -31,7 +31,7 @@ export async function getWatchlist(){
 }
 
 
-export async function addToWatchlist(stock : {ticker: string, name: string, markingPrice: string, logo: string}){
+export async function addToWatchlist(stock : {ticker: string, name: string, markedPrice: string, logo: string}){
     await setDoc(doc(db, `${auth.currentUser?.uid}-watchlist`, stock.ticker, ), stock); 
 }
 

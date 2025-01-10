@@ -33,7 +33,7 @@ export default function StockInfoBox({ticker} : {ticker:string}) {
             {
                 ticker: ticker,
                 name: logo!.name,
-                markingPrice: stock!.price,
+                markedPrice: stock!.price,
                 logo: logo!.image
 
             }
