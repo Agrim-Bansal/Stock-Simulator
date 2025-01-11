@@ -28,7 +28,7 @@ export default function SearchBox({className, setActiveTicker}: {className?: str
         <div className={"search-box w-256 mx-auto flex flex-col justify-center items-center" + className} onBlur={lostFocus} onFocus={gainedFocus}>
 
             <div className="search flex bg-zinc-800 rounded-full ">
-                <Search size="32" color="white" className="absolute z-10 mt-4 mx-4"/>
+                <Search size="32" color="white" className="absolute z-2 mt-4 mx-4"/>
                 <input type="text" placeholder="Look up a stock" className="px-16 bg-transparent h-16 w-256 text-lg focus:outline-none" onChange={changeHandler} />
             </div>
 

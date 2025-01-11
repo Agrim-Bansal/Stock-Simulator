@@ -41,7 +41,6 @@ export default function Home() {
   useEffect(() => {
     updatePrices(stocks);
     // setPrices(stocks?.map((stock) => {return {ticker: stock.ticker, price: '0'};}));
-    console.log(stocks);
   }, [stocks]);
 
 

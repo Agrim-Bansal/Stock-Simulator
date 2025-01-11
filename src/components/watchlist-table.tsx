@@ -34,7 +34,6 @@ export default function StockTable({stocks, setStocks, setPrices, prices}:{stock
 
     function removeFromWatchlistHandler (ticker: string){
         removeFromWatchlist(ticker)
-        console.log(stocks.filter(stock => stock.ticker !== ticker));
         
         setStocks(stocks.filter(stock => stock.ticker !== ticker));
         setPrices(prices.filter(price => price.ticker !== ticker));

@@ -83,3 +83,12 @@ I think it will completely totally handle my graphing problem by embedding a cha
 I'll do that tomorrow though. 
 
 -----------------------------------------
+
+hey. it's a new day. today i kinda sorta spent my time in the shipathon thing. so i logged relatively less amount of hours.
+but i did manage to finalise all the stuff related to trade page ( I hope so). I've pretty much implemented all. 
+What is left to do is to do a bit of testing on buying - selling of the stock and to figure out the part about shorting the stocks.
+It goes to say that the database structure also just came out by itself -
+for portfolios, it is simply portfolios/{uid} and stores two fields : money as in liquid balance and stocks as in holding with qty.
+for trades i went {uid}-trades/{dateTime of the trade}. Now I need to implement the main home page with profit/loss of the account.
+going over all trades and showing holdings and everything.
+--------------------
