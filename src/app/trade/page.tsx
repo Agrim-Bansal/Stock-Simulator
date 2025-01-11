@@ -102,7 +102,7 @@ function Trade({}) {
       setMessage('Trade Executed Successfully');
       
     }else if (trade == 'Sell'){
-      if(parseInt(portfolio?.stock.get(activeTicker)) < parseInt(qty)){
+      if(parseInt(portfolio?.stocks.get(activeTicker)) < parseInt(qty)){
         setMessage('Insufficient Stocks');
         setLoading(false);
         setConfirmTrade(false);
