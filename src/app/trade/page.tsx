@@ -98,11 +98,9 @@ function Trade({}) {
         return;
       }
       await makeTrade({action: 'buy', quantity: parseFloat(qty), ticker: activeTicker});
-
-      setMessage('Trade Executed Successfully');
       
     }else if (trade == 'Sell'){
-      if(parseInt(portfolio?.stocks.get(activeTicker)) < parseInt(qty)){
+      if(parseInt(portfolio?.stocks[activeTicker]) < parseInt(qty)){
         setMessage('Insufficient Stocks');
         setLoading(false);
         setConfirmTrade(false);
@@ -120,7 +118,7 @@ function Trade({}) {
       }
       await makeTrade({action: 'short', quantity: parseFloat(qty), ticker: activeTicker});
     }
-
+    setMessage('Trade Executed Successfully');
     setLoading(false);  
     setConfirmTrade(false);
   }
@@ -176,12 +174,12 @@ function Trade({}) {
       }
 
         <div className="flex my-16 w-256 justify-evenly">
-          <button className='bg-primary text-primary-foreground rounded-lg p-2 w-96' onClick={tradeConfirmation}>Execute Trade</button>
           <button type='reset' className='bg-destructive text-destructive-foreground rounded-lg p-2 w-96' onClick={clear}>Clear</button>
+          <button className='bg-primary text-primary-foreground rounded-lg p-2 w-96' onClick={tradeConfirmation}>Execute Trade</button>
         </div>
       
 
-      <div className={`duration-500 flex justify-center z-2 text-gray-200 w-screen h-screen fixed top-0 left-0 text-white backdrop-blur-sm duration-10000 ${(confirmTrade) ? '' : 'scale-0'}`}>
+      <div className={`duration-200 flex justify-center z-2 text-gray-200 w-screen h-screen fixed top-0 left-0 text-white backdrop-blur-sm duration-10000 ${(confirmTrade) ? '' : 'scale-0'}`}>
         <div className="flex flex-col justify-evenly card w-96 bg-white my-auto h-80 p-8 rounded-lg text-black">
           
           <div className="flex justify-between">

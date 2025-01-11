@@ -42,7 +42,7 @@ export default function StockInfoBox({ticker} : {ticker:string}) {
     }
 
     return (
-        <div className={`stock-info-box duration-500 ${isActive ? '' : 'scale-0'} h-screen w-full fixed z-10 flex backdrop-blur-sm left-0`}>
+        <div className={`stock-info-box ${isActive ? '' : 'hidden'} h-screen w-full fixed z-10 flex backdrop-blur-sm left-0`}>
             <div className='flex flex-col w-256 mx-auto my-10 bg-black justify-between p-5 rounded-lg border border-white'>
 
             {!loading ?
