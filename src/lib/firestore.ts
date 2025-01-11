@@ -20,12 +20,10 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 export async function getWatchlist(){
-
     const uid = auth.currentUser?.uid;
     const docSnap = await getDocs(collection(db, `${uid}-watchlist`));
     const data = docSnap.docs.map(doc => doc.data());
     return data;
-
 }
 
 export async function addToWatchlist(stock : {ticker: string, name: string, markedPrice: string, logo: string}){

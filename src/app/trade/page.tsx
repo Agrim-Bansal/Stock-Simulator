@@ -94,6 +94,7 @@ function Trade({}) {
       if(parseFloat(portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
         setMessage('Insufficient Funds');
         setLoading(false);
+        setConfirmTrade(false);
         return;
       }
       await makeTrade({action: 'buy', quantity: parseFloat(qty), ticker: activeTicker});
@@ -104,6 +105,7 @@ function Trade({}) {
       if(parseInt(portfolio?.stock.get(activeTicker)) < parseInt(qty)){
         setMessage('Insufficient Stocks');
         setLoading(false);
+        setConfirmTrade(false);
         return;
       }
 
@@ -113,6 +115,7 @@ function Trade({}) {
       if(parseFloat(portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
         setMessage('Insufficient Funds');
         setLoading(false);
+        setConfirmTrade(false);
         return;
       }
       await makeTrade({action: 'short', quantity: parseFloat(qty), ticker: activeTicker});
