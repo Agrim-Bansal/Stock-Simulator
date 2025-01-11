@@ -12,7 +12,7 @@ function TableRow(stock:{symbol:string, logo:string, name:string, price:number, 
             <div className="basis-1/6 font-normal flex items-center justify-center">{stock.symbol}</div>
             <div className={`basis-1/6 font-light flex items-center justify-center`} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             <div className={`basis-1/6 font-light flex items-center justify-center ${stock.change>0? 'text-green-400' : 'text-red-400'}`} > {stock.change} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
-            <div className={`basis-1/6 font-light flex items-center justify-center ${stock.change>0? 'text-green-400' : 'text-red-400'}`} >{(stock.change/stock.price).toFixed(2)}%</div>
+            <div className={`basis-1/6 font-light flex items-center justify-center ${stock.change>0? 'text-green-400' : 'text-red-400'}`} >{(stock.change*100/stock.price).toFixed(2)}%</div>
             <div className="basis-1/6 font-normal flex items-center justify-center" >{stock.volume}M</div>
             <div className="basis-1/6 font-normal flex items-center justify-center" >{stock.marketCap}M</div>
             <div className="basis-1/6 font-semibold flex items-center justify-center text-sm">{stock.industry}</div> 

@@ -181,7 +181,7 @@ function Trade({}) {
         </div>
       
 
-      <div className={`transition-500 flex justify-center z-2 text-gray-200 w-screen h-screen fixed top-0 left-0 text-white backdrop-blur-sm transition-10000 ${(confirmTrade) ? '' : 'scale-0'}`}>
+      <div className={`duration-500 flex justify-center z-2 text-gray-200 w-screen h-screen fixed top-0 left-0 text-white backdrop-blur-sm duration-10000 ${(confirmTrade) ? '' : 'scale-0'}`}>
         <div className="flex flex-col justify-evenly card w-96 bg-white my-auto h-80 p-8 rounded-lg text-black">
           
           <div className="flex justify-between">
