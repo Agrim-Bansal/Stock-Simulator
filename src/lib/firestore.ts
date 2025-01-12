@@ -35,13 +35,14 @@ export async function removeFromWatchlist(ticker: string){
     await deleteDoc(doc(db, `${auth.currentUser?.uid}-watchlist`, ticker));  
 }
 
-export async function makeTrade({action, quantity, ticker} : {action: string, quantity: number, ticker: string}){
+export async function makeTrade({action, quantity, ticker, price} : {action: string, quantity: number, ticker: string, price: number}){
     const uid = auth.currentUser?.uid;
     const trade = {
         action,
         quantity,
         ticker,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        price
     }
     setDoc(doc(db, `${uid}-trades/${Date.now()}`), trade);
 
@@ -54,7 +55,7 @@ export async function makeTrade({action, quantity, ticker} : {action: string, qu
     if (action == 'buy'){
         setDoc(doc(db, `portfolios/${uid}`),
         {
-        money: parseFloat(portfolio?.money) - (parseFloat(tickerPrice) *quantity),
+        money: (portfolio?.money) - (parseFloat(tickerPrice) *quantity),
         stocks: {
             ...portfolio?.stocks,
             [ticker]: (portfolio?.stocks[ticker] || 0) + quantity
@@ -63,7 +64,7 @@ export async function makeTrade({action, quantity, ticker} : {action: string, qu
     }else if (action =='sell'){
         setDoc(doc(db, `portfolios/${uid}`), 
         {
-            money : parseFloat(portfolio?.money) + (parseFloat(tickerPrice) * quantity),
+            money : (portfolio?.money) + (parseFloat(tickerPrice) * quantity),
             stocks : {
                 ...portfolio?.stocks,
                 [ticker]: (portfolio?.stocks[ticker] || 0) - quantity
@@ -87,7 +88,15 @@ export async function getPortfolio(){
         return({money:100000, stocks:{}})
     }
 
-    const data = docSnap.data();
+    const data = docSnap.data() as {money: number, stocks: {[key: string]: number}};
 
+    return data;
+}
+
+
+export async function getTrades(){
+    const uid = auth.currentUser?.uid;
+    const docSnap = await getDocs(collection(db, `${uid}-trades`));
+    const data = docSnap.docs.map(doc => doc.data()) as {action: string, quantity: number, ticker: string, timestamp: number, price: number}[];
     return data;
 }

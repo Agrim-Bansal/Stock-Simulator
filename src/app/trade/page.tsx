@@ -91,32 +91,33 @@ function Trade({}) {
     
     
     if (trade == 'Buy'){
-      if(parseFloat(portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
+      if((portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
         setMessage('Insufficient Funds');
         setLoading(false);
         setConfirmTrade(false);
         return;
       }
-      await makeTrade({action: 'buy', quantity: parseFloat(qty), ticker: activeTicker});
+      await makeTrade({action: 'buy', quantity: parseFloat(qty), ticker: activeTicker, price: parseFloat(stockPrice)});
       
     }else if (trade == 'Sell'){
-      if(parseInt(portfolio?.stocks[activeTicker]) < parseInt(qty)){
+      console.log(portfolio?.stocks[activeTicker]);
+      if((portfolio?.stocks[activeTicker]) < parseInt(qty) || portfolio?.stocks[activeTicker] == undefined){
         setMessage('Insufficient Stocks');
         setLoading(false);
         setConfirmTrade(false);
         return;
       }
 
-      await makeTrade({action: 'sell', quantity: parseFloat(qty), ticker: activeTicker});
+      await makeTrade({action: 'sell', quantity: parseFloat(qty), ticker: activeTicker, price: parseFloat(stockPrice)});
 
     }else if (trade == 'Short'){
-      if(parseFloat(portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
+      if((portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
         setMessage('Insufficient Funds');
         setLoading(false);
         setConfirmTrade(false);
         return;
       }
-      await makeTrade({action: 'short', quantity: parseFloat(qty), ticker: activeTicker});
+      await makeTrade({action: 'short', quantity: parseFloat(qty), ticker: activeTicker, price: parseFloat(stockPrice)});
     }
     setMessage('Trade Executed Successfully');
     setLoading(false);  

@@ -1,15 +1,17 @@
+"use client";
 import TradingViewChart from '@/components/tradingViewChart';
 import { stockInfo } from '@/pages/api/stocks';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { addToWatchlist } from '@/lib/firestore';
+import { useRouter } from 'next/navigation';
 
 export default function StockInfoBox({ticker} : {ticker:string}) {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [stock, setStock] = useState<{'price': string, 'change percent': string}>();
     const [logo, setLogo] = useState<{name: string, image: string}>();
     const [loading, setLoading] = useState<boolean>(true);
-
+    const router = useRouter();
     useEffect(() => {
 
         async function getStockInfo(){
@@ -67,7 +69,7 @@ export default function StockInfoBox({ticker} : {ticker:string}) {
             </div>
 
             <div className='flex justify-evenly w-128 mx-auto'>
-                <button className='bg-primary text-primary-foreground rounded-lg p-2 w-36'>Trade</button>
+                <button className='bg-primary text-primary-foreground rounded-lg p-2 w-36' onClick={()=> router.push(`/trade?ticker=${ticker}`)}>Trade</button>
                 <button className='bg-accent text-accent-foreground rounded-lg p-2 w-36' onClick={watchlistAdder}>Add to Watchlist</button>
                 <button className='bg-destructive text-destructive-foreground rounded-lg p-2 w-36' onClick={()=>setIsActive(false)}>Close</button>
             </div>
