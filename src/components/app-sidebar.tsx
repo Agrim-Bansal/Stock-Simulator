@@ -38,19 +38,18 @@ import Link from "next/link"
                 <SidebarMenuButton asChild>
                 <Link href="/dashboard"><Home/> Portfolio</Link>
                 </SidebarMenuButton> 
+                
+                <SidebarMenuButton asChild>
+                    <Link href="/research"> <Search/> Stock Lookup </Link>
+                </SidebarMenuButton>
 
-                <SidebarMenuButton asChild>
-                    <Link href="/trade"> <HandCoins/> Trade</Link>
-                </SidebarMenuButton>
-                
-                <SidebarMenuButton asChild>
-                    <Link href="/research"> <Search/> Research</Link>
-                </SidebarMenuButton>
-                
                 <SidebarMenuButton asChild>
                     <Link href="/watchlist"> <ScanEye/> Watchlist </Link>
                 </SidebarMenuButton>
-                
+
+                <SidebarMenuButton asChild>
+                    <Link href="/trade"> <HandCoins/> Trade </Link>
+                </SidebarMenuButton>
                 
             </SidebarMenu>
           </SidebarGroup>

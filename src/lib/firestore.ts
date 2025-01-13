@@ -100,3 +100,18 @@ export async function getTrades(){
     const data = docSnap.docs.map(doc => doc.data()) as {action: string, quantity: number, ticker: string, timestamp: number, price: number}[];
     return data;
 }
+
+export async function getHoldings(){
+    const portfolio = await getPortfolio();
+
+    let holdings : {ticker:string, quantity:number, price:number}[] = [];
+
+    for (let i =0; i < Object.keys(portfolio.stocks).length; i++){
+        const stocks = portfolio.stocks[Object.keys(portfolio.stocks)[i]];
+        const price = (await stockInfo(Object.keys(portfolio.stocks)[i]))[0].price;
+
+        holdings = [...holdings, {ticker: Object.keys(portfolio.stocks)[i], quantity: stocks, price: parseFloat(price)}];
+    }
+
+    return holdings;
+}

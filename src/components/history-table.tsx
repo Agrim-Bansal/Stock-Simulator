@@ -7,13 +7,13 @@ function TableRow(stock:{timestamp:number, quantity:number ,symbol:string, price
 
             <div className="basis-1/4 font-normal flex items-center justify-center">{stock.symbol}</div>
             
-            <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' ? 'text-red-500': 'text-green-500'}`}>{stock.action.toUpperCase()} </div>
+            <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' ? 'text-green-500': 'text-red-500'}`}>{stock.action.toUpperCase()} </div>
 
             <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' ? 'text-green-500': 'text-red-500'}`} >{stock.action == 'buy' ? '+': '-'} {stock.quantity} &nbsp; </div>
 
             <div className={`basis-1/4 font-bold flex items-center justify-center `} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             
-            <div className={`basis-1/4 font-bold flex items-center justify-center ${stock.action == 'buy' ? 'text-red-500': 'text-green-500'}`} >{stock.action == 'buy' ? '-': '+'} {(stock.price * stock.quantity).toFixed(2)} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
+            <div className={`basis-1/4 font-bold flex items-center justify-center`} >{stock.action == 'buy' ? '-': '+'} {(stock.price * stock.quantity).toFixed(2)} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
 
             <div className="basis-1/5 font-extralight flex items-center justify-between text-md cursor-pointer">{dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}</div>
         </div>

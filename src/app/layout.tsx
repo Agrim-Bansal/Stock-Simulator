@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import '@/lib/auth';
-import { Quicksand } from "next/font/google";
+import {IBM_Plex_Sans } from "next/font/google";
 
-const quickSand = Quicksand({
+const ibmPlexSans = IBM_Plex_Sans({
   weight: ['300', '400', '500', '600', '700'],
   display: "swap",
   subsets: ["latin"],
 });
+
 
 export const metadata: Metadata = {
   title: "Stock Simulator",
@@ -18,7 +19,7 @@ export default  function RootLayout({children,}: Readonly<{children: React.React
 
   return (
     <html lang="en">
-      <body className={`${quickSand.className} antialiased dark`}>
+      <body className={`${ibmPlexSans.className} antialiased dark`}>
         {children}
       </body>
     </html>
