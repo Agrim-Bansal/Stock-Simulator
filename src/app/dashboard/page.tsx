@@ -85,7 +85,7 @@ export default function Home() {
             
             <div className="flex my-5 justify-between items-end">
               <div className="totalValue text-5xl text-green-500">${
-                getTotalValue()
+                getTotalValue().toFixed(2)
                 } </div>
               <div className="text-xl font-300">Total Account Value</div>
             </div>
