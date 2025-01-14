@@ -10,14 +10,14 @@ function TableRow(stock:{symbol:string, newPrice:number, shortPrice:number, inde
             <div className="basis-1/4 font-normal flex items-center justify-center">{stock.symbol}</div>
             <div className="basis-1/4 font-normal flex items-center justify-center">{stock.quantity}</div>
 
-            <div className={`basis-1/4 font-light flex items-center justify-center`} > {stock.shortPrice} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
+            <div className={`basis-1/4 font-bold flex items-center justify-center`} > {stock.shortPrice} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             {stock.newPrice === 0 ?
             <div className='loader'></div>
                 :
-            <div className={`basis-1/4 font-light flex items-center justify-center ${change<=0? 'text-green-400' : 'text-red-400'}`} > {stock.newPrice} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
+            <div className={`basis-1/4 font-bold flex items-center justify-center ${change<=0? 'text-green-400' : 'text-red-400'}`} > {stock.newPrice} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             
             }
-            <div className={`basis-1/4 font-light flex items-center justify-center ${change<=0? 'text-green-400' : 'text-red-400'}`} >{(change*stock.quantity).toFixed(2)}  &nbsp; <div className="text-sm font-extralight"> USD </div>  </div>
+            <div className={`basis-1/4 font-bold flex items-center justify-center ${change>=0? 'text-green-400' : 'text-red-400'}`} >{(change*stock.quantity).toFixed(2)}  &nbsp; <div className="text-sm font-extralight"> USD </div>  </div>
             <div className="basis-1/5 font-bold flex items-center justify-center text-md cursor-pointer" onClick={()=> window.location.href = `/trade?ticker=${stock.symbol}` }>Cover/Increase</div>
 
         </div>

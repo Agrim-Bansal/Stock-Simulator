@@ -186,3 +186,10 @@ export async function getShortsWithPrice(){
 
     return shortsWithPrices;
 }
+
+export async function deleteUserData(uid:string){
+    deleteDoc(doc(db, `portfolios/${uid}`));
+    deleteDoc(doc(db, `${uid}-watchlist`));
+    deleteDoc(doc(db, `${uid}-trades`));
+    deleteDoc(doc(db, `${uid}-shorts`));
+}

@@ -10,7 +10,7 @@ In the future, I intend to bring cryptocurrencies to the platform as well.
 
 Visit the platform : [Stock Simulator](https://stock-simulator-beta.vercel.app/)
 
-Make an account or use the demo : <u> demo@example.com; password: 12345678 </u>
+Make an account or use the demo : ```demo@example.com; password: 12345678```
 
 ## Features include:
 - User Accounts 

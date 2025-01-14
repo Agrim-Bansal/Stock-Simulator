@@ -148,7 +148,7 @@ function Trade({}) {
 
       {activeTicker !='' &&
       <div className="mx-auto w-256 flex my-12">
-        <div className="flex w-128 h-96 flex-wrap">
+        <div className="flex w-128 h-full flex-wrap">
           <TradingViewWidget ticker={activeTicker} key={activeTicker}/>
         </div>
         <div className="flex w-128 h-96 flex-wrap">

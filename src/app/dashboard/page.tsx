@@ -65,6 +65,9 @@ export default function Home() {
     holdings.forEach((stock) => {
       totalValue += stock.price * stock.quantity;
     });
+    shorts.forEach((stock) => {
+      totalValue += (stock.price-stock.newPrice) * stock.quantity;
+    });
     return totalValue;
   }
 

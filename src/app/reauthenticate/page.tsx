@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import '@/lib/auth';
 import {onAuthStateChanged, User, getAuth, reauthenticateWithCredential, EmailAuthProvider, deleteUser} from 'firebase/auth';
 import { useRouter } from "next/navigation";
+import { deleteUserData } from "@/lib/firestore";
 
 export default function LoginPage() {
 
@@ -33,6 +34,8 @@ export default function LoginPage() {
     reauthenticateWithCredential(getAuth().currentUser!, credential)
     .then(() => {
       deleteUser(getAuth().currentUser!).then(() => {
+        deleteUserData(getAuth().currentUser!.uid);
+        getAuth().signOut();
         router.push("/deleted?q=success");
       }).catch((error) => {
         setMessage(error.message);
