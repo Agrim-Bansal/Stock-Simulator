@@ -91,4 +91,10 @@ It goes to say that the database structure also just came out by itself -
 for portfolios, it is simply portfolios/{uid} and stores two fields : money as in liquid balance and stocks as in holding with qty.
 for trades i went {uid}-trades/{dateTime of the trade}. Now I need to implement the main home page with profit/loss of the account.
 going over all trades and showing holdings and everything.
+
 --------------------
+
+ahh. this is it. I think i've done just about all of it. tho i'm asking for feedbacks and that may take some bit of time but well yeah. I'm finally doneee.
+I need to write documentation, readme, user guide and the project journey - it certainly has been wierd.
+
+So what the hell. let's gooo!!
