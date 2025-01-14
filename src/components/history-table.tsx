@@ -3,17 +3,17 @@
 function TableRow(stock:{timestamp:number, quantity:number ,symbol:string, price:number, action:string, index:number}){
     const dateTime = new Date(stock.timestamp);
     return(
-        <div className={`flex justify-evenly py-4 px-5 text-xl flex items-center justify-center border-b ${stock.index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'}`}>
+        <div className={`flex justify-evenly py-4 px-5 text-xl flex items-center justify-center border-b ${stock.index % 2 === 0 ? 'bg-gray-800' : ' bg-gray-950'}`}>
 
             <div className="basis-1/4 font-normal flex items-center justify-center">{stock.symbol}</div>
             
-            <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' ? 'text-green-500': 'text-red-500'}`}>{stock.action.toUpperCase()} </div>
+            <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' || stock.action == 'cover' ? 'text-green-500': 'text-red-500'}`}>{stock.action.toUpperCase()} </div>
 
-            <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' ? 'text-green-500': 'text-red-500'}`} >{stock.action == 'buy' ? '+': '-'} {stock.quantity} &nbsp; </div>
+            <div className={`basis-1/4 font-normal flex items-center justify-center ${stock.action == 'buy' || stock.action == 'cover' ? 'text-green-500': 'text-red-500'}`} >{stock.action == 'buy' || stock.action == 'cover' ? '+': '-'} {stock.quantity} &nbsp; </div>
 
             <div className={`basis-1/4 font-bold flex items-center justify-center `} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
             
-            <div className={`basis-1/4 font-bold flex items-center justify-center`} >{stock.action == 'buy' ? '-': '+'} {(stock.price * stock.quantity).toFixed(2)} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
+            <div className={`basis-1/4 font-bold flex items-center justify-center`} >{stock.action == 'buy' || stock.action == 'cover' ? '-': '+'} {(stock.price * stock.quantity).toFixed(2)} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
 
             <div className="basis-1/5 font-extralight flex items-center justify-between text-md cursor-pointer">{dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}</div>
         </div>
@@ -24,7 +24,7 @@ function TableRow(stock:{timestamp:number, quantity:number ,symbol:string, price
 export default function HistoryTable({stocks} : {stocks : {ticker:string, action:string, timestamp:number, quantity:number, price:number}[]}){
 
     return(
-        <div className="stock-table my-10 p-2 w-256 mx-auto table font-extralight bg-gray-950 text-white text-center"> 
+        <div className="stock-table my-10 w-256 mx-auto table font-extralight bg-gray-950 text-white text-center"> 
 
                 <div className="table-header-group bg-gray-950 ">
                     <div className="flex border h-16 text-xl">

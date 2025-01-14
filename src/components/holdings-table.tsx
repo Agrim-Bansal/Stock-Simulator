@@ -1,23 +1,23 @@
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-function TableRow(stock:{quantity:number ,symbol:string, price:number, index:number, loading:boolean}){
+function TableRow(stock:{quantity:number, symbol:string, price:number, index:number, loading:boolean}){
 
     return(
-        <div className={`flex justify-evenly py-4 px-5 text-xl flex items-center justify-center border-b ${stock.index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'}`}>
+        <div className={`flex justify-evenly py-4  text-xl flex items-center justify-center border-b ${stock.index % 2 === 0 ? 'bg-gray-800' : ' bg-gray-950'}`}>
 
-            <div className="basis-1/4 font-normal flex items-center justify-center">{stock.symbol}</div>
+            <div className="basis-1/5 font-normal flex items-center justify-center">{stock.symbol}</div>
 
-            <div className={`basis-1/4 font-normal flex items-center justify-center `} > {stock.quantity} &nbsp; </div>
+            <div className={`basis-1/5 font-normal flex items-center justify-center `} > {stock.quantity} &nbsp; </div>
             {stock.loading ?
                 <div className="basis-1/2">Loading...</div> :
                 <>
-                <div className={`basis-1/4 font-bold flex items-center justify-center `} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
-                <div className={`basis-1/4 font-bold flex items-center justify-center `} > {(stock.price * stock.quantity).toFixed(2)} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
+                <div className={`basis-1/5 font-bold flex items-center justify-center `} > {stock.price} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
+                <div className={`basis-1/5 font-bold flex items-center justify-center `} > {(stock.price * stock.quantity).toFixed(2)} &nbsp; <div className="text-sm font-extralight"> USD </div> </div>
                 </>
             }
 
 
-            <div className="basis-1/5 font-extralight flex items-center justify-between text-md cursor-pointer">Trade More</div>
+            <div className="basis-1/5 font-light flex items-center justify-center text-md cursor-pointer" onClick={()=> window.location.href = `/trade?ticker=${stock.symbol}` }>Buy/Sell</div>
         </div>
     )
 }
@@ -34,7 +34,7 @@ export default function HoldingsTable({stocks, loading} : {stocks : {ticker:stri
                         <div className="basis-1/5 border self-center h-full flex items-center justify-center">Quanitity</div>
                         <div className="basis-1/5 border self-center h-full flex items-center justify-center">Price</div>
                         <div className="basis-1/5 border self-center h-full flex items-center justify-center">Total Value</div>
-                        <div className="basis-1/5 border self-center h-full flex items-center justify-center">Buy/Sell</div>
+                        <div className="basis-1/5 border self-center h-full flex items-center justify-center">Trade</div>
                     </div>
                 </div>
 

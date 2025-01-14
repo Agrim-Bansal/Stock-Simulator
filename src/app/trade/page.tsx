@@ -6,8 +6,9 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import TradingViewWidget from "@/components/tradingViewSymbolInfo";
 import TradingViewChart from "@/components/tradingViewOverviewChart";
-import { getPortfolio, makeTrade } from "@/lib/firestore";
+import { getPortfolio, getShort, makeTrade } from "@/lib/firestore";
 import { stockInfo } from "@/pages/api/stocks";
+
 
 
 function Trade({}) {
@@ -18,6 +19,7 @@ function Trade({}) {
   const [message, setMessage] = useState<string>('');
   const [stockPrice, setStockPrice] = useState<string>('0');
   const [qty, setQty] = useState<string>('0');
+
 
   if (searchParams?.has("ticker")) {
     initialTicker = searchParams.get("ticker")!;
@@ -88,11 +90,11 @@ function Trade({}) {
     setLoading(true);
 
     const portfolio = await getPortfolio();
-    
+    const short = await getShort(activeTicker);
     
     if (trade == 'Buy'){
       if((portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
-        setMessage('Insufficient Funds');
+        setMessage('Insufficient Funds. Please add money to your account to buy stocks.');
         setLoading(false);
         setConfirmTrade(false);
         return;
@@ -102,7 +104,7 @@ function Trade({}) {
     }else if (trade == 'Sell'){
       console.log(portfolio?.stocks[activeTicker]);
       if((portfolio?.stocks[activeTicker]) < parseInt(qty) || portfolio?.stocks[activeTicker] == undefined){
-        setMessage('Insufficient Stocks');
+        setMessage('Insufficient Stocks. You do not own enough stocks to sell');
         setLoading(false);
         setConfirmTrade(false);
         return;
@@ -111,14 +113,24 @@ function Trade({}) {
       await makeTrade({action: 'sell', quantity: parseFloat(qty), ticker: activeTicker, price: parseFloat(stockPrice)});
 
     }else if (trade == 'Short'){
-      if((portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty))){
-        setMessage('Insufficient Funds');
+      if((portfolio?.money) < (parseFloat(stockPrice) * parseFloat(qty) * 1.5)){
+        setMessage('Insufficient Funds. Shorting requires 150% of the stock value');
         setLoading(false);
         setConfirmTrade(false);
         return;
       }
       await makeTrade({action: 'short', quantity: parseFloat(qty), ticker: activeTicker, price: parseFloat(stockPrice)});
+    } else if (trade == 'Buy to Cover'){
+      if(short == undefined || short.quantity < parseInt(qty)){
+        setMessage("Insufficient Stocks. You haven't shorted enough stocks to buy to cover");
+        setLoading(false);
+        setConfirmTrade(false);
+        return;
+      }
+      await makeTrade({action: 'cover', quantity: parseFloat(qty), ticker: activeTicker, price: parseFloat(stockPrice)});
+      
     }
+
     setMessage('Trade Executed Successfully');
     setLoading(false);  
     setConfirmTrade(false);
@@ -127,7 +139,6 @@ function Trade({}) {
   function clearMessage(){
     setMessage('');
   }
-
 
   return (
       <div className="w-256 mx-auto text-2xl flex flex-col">
@@ -156,6 +167,7 @@ function Trade({}) {
               <option value="Buy">Buy</option>
               <option value="Sell">Sell</option>
               <option value="Short">Short</option>
+              <option value="Buy to Cover">Buy to Cover</option>
             </select>   
 
           </div>
@@ -163,7 +175,7 @@ function Trade({}) {
           <div className="flex flex-col items-start justify-start mx-auto">
             
             <div className="text-lg text-gray-200">Quantity</div>
-            <input type='number' name="Quanity" onChange={(e) =>  setQty(e.target.value)} id="qty" className="bg-black text-white mx-auto focus:outline-none font-semibold w-64 p-5 border border-gray-500" /> 
+            <input type='number' name="Quanity" onChange={(e) =>  setQty(e.target.value)} onWheel={(e) => (e.target as HTMLInputElement).blur()} id="qty" className="bg-black text-white mx-auto focus:outline-none font-semibold w-64 p-5 border border-gray-500" /> 
           </div>
         
         </div>

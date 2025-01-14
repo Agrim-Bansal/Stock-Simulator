@@ -71,6 +71,48 @@ export async function makeTrade({action, quantity, ticker, price} : {action: str
             }
         }
     )
+    }else if(action == 'short'){
+        const shorts = await getShorts();
+
+        if (shorts.some(short => short.ticker == ticker)){
+            const short = shorts.find(short => short.ticker == ticker);
+            const newAvgPrice = (short!.price * short!.quantity + price*quantity) / (short!.quantity + quantity);
+
+            setDoc(doc(db, `${uid}-shorts/${ticker}`),{
+                ticker : ticker,
+                quantity : shorts.find(short => short.ticker == ticker)!.quantity + quantity,
+                price : newAvgPrice
+            }
+        )
+        }else{
+            setDoc(doc(db, `${uid}-shorts/${ticker}`),{
+                ticker : ticker,
+                quantity : quantity,
+                price : price,
+            })
+        }
+    }else if(action == 'cover'){
+        const shorts = await getShorts();
+
+        const short = shorts.find(short => short.ticker == ticker);
+        
+        if (short!.quantity == quantity){
+            deleteDoc(doc(db, `${uid}-shorts/${ticker}`));
+        }else{
+            setDoc(doc(db, `${uid}-shorts/${ticker}`),{
+                ticker : ticker,
+                quantity : short!.quantity - quantity ,
+                price : price
+            }
+        )
+        }
+
+        setDoc(doc(db, `portfolios/${uid}`), 
+        {
+            money : (portfolio?.money) - (parseFloat(tickerPrice) * quantity) + (short!.price*quantity),
+            stocks : portfolio.stocks,
+        }
+    )
     }
 
 }
@@ -98,7 +140,7 @@ export async function getTrades(){
     const uid = auth.currentUser?.uid;
     const docSnap = await getDocs(collection(db, `${uid}-trades`));
     const data = docSnap.docs.map(doc => doc.data()) as {action: string, quantity: number, ticker: string, timestamp: number, price: number}[];
-    return data;
+    return data.sort((a,b) => b.timestamp - a.timestamp);
 }
 
 export async function getHoldings(){
@@ -114,4 +156,33 @@ export async function getHoldings(){
     }
 
     return holdings;
+}
+
+
+export async function getShorts(){
+    const uid = auth.currentUser?.uid;
+    const docSnap = await getDocs(collection(db, `${uid}-shorts`));
+    console.log(docSnap.docs);
+    const data = docSnap.docs.map(doc => doc.data()) as {ticker:string, quantity:number, price:number}[];
+    console.log(data);
+    return data;
+    }
+
+export async function getShort(ticker: string){
+    const uid = auth.currentUser?.uid;
+    const docSnap = await getDoc(doc(db, `${uid}-shorts/${ticker}`));
+    return docSnap.data();
+}
+
+
+export async function getShortsWithPrice(){
+    const shorts = await getShorts();
+    const shortsWithPrices : {ticker:string, quantity:number, price:number, newPrice:number}[] = [];
+    for (let i=0; i< shorts.length; i++){
+        const short = shorts[i];
+        const price = (await stockInfo(short.ticker))[0].price;
+        shortsWithPrices[i] = {...short, newPrice: parseFloat(price)};
+    }
+
+    return shortsWithPrices;
 }

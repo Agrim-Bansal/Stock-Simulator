@@ -4,7 +4,7 @@ import Image from 'next/image'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 function TableRow(stock:{symbol:string, logo:string, name:string, price:number, change:number, marketCap:number, volume:number, industry:string, index:number, onClick:Function}){
     return(
-        <div className={`flex justify-evenly py-4 px-5 flex items-center justify-center border-b ${stock.index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'}`}>
+        <div className={`flex justify-evenly py-4 px-5 flex items-center justify-center border-b ${stock.index % 2 === 0 ? 'bg-gray-800' : ' bg-gray-950'}`}>
             <div className="basis-1/6 font-bold flex items-center justify-between text-sm cursor-pointer" onClick={() => stock.onClick()}>
             <Image src={stock.logo? stock.logo : "/@/app/icon.png"} alt={stock.name} height='30' width='30' /> 
             {stock.name}

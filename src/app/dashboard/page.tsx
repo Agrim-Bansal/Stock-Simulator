@@ -1,11 +1,12 @@
 "use client";
 import {useEffect, useState } from "react";
 import TradingViewWidget from "@/components/tradingViewMarketOverview";
-import { getHoldings, getPortfolio, getTrades,  } from "@/lib/firestore";
+import { getHoldings, getPortfolio, getShortsWithPrice, getTrades,  } from "@/lib/firestore";
 // import { stockInfo } from "@/pages/api/stocks";
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import HistoryTable from "@/components/history-table";
 import HoldingsTable from "@/components/holdings-table";
+import ShortsTable from "@/components/shorts-table";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
@@ -15,6 +16,7 @@ export default function Home() {
   const [portfolio, setPortfolio] = useState<{money: number, stocks : {[key:string] : number}}>({money: 0, stocks: {}});
   const [history, setHistory] = useState<{action: string, quantity: number, ticker: string, timestamp: number, price: number}[]>([]);
   const [holdings, setHoldings] = useState<{ticker: string, quantity: number, price: number}[]>([]);
+  const [shorts, setShorts] = useState<{ticker:string, quantity:number, price:number, newPrice:number}[]>([]);
 
   
     useEffect(() => {
@@ -34,6 +36,11 @@ export default function Home() {
           getTrades()
           .then((history) => {
             setHistory(history);
+          });
+
+          getShortsWithPrice()
+          .then((shorts) => {
+            setShorts(shorts);
           });
 
         } else {
@@ -83,11 +90,16 @@ export default function Home() {
 
             <div className="w-2/5 mx-5 flex flex-col justify-center">
             
-            <div className="flex my-5 justify-between items-end">
-              <div className="totalValue text-5xl text-green-500">${
-                getTotalValue().toFixed(2)
-                } </div>
-              <div className="text-xl font-300">Total Account Value</div>
+            <div className="flex my-5 w-full justify-between items-end">
+              { holdingsLoading? 
+                <div className="totalValue text-5xl text-green-500">Loading...</div>
+                :
+                <div className="totalValue text-5xl text-green-500">$
+                {getTotalValue().toFixed(2)} 
+                </div>
+              }
+
+              <div className="text-xl font-300 text-right">Total Account Value</div>
             </div>
 
             <div className="flex my-5 justify-between items-end">
@@ -97,17 +109,21 @@ export default function Home() {
 
             </div>
 
-            <div className="w-3/5 mx-5 border border-white">
+            <div className="w-3/5 mx-5">
               <div className="text-2xl w-full text-center">Market OverView</div>
               <TradingViewWidget/>
             </div>
 
         </div>
 
-
         <div className="Holdings">
           <div className="text-2xl">Holdings</div>
           <HoldingsTable stocks={holdings} key={portfolio.money} loading={holdingsLoading}/>
+        </div>
+
+        <div>
+          <div className="text-2xl">Shorts</div>
+          <ShortsTable key={portfolio.money} stocks={shorts}/>
         </div>
 
         <div className="Trade History">
