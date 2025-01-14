@@ -38,16 +38,28 @@ Make an account or use the demo : ```demo@example.com; password: 12345678```
 ## How to use the platform:
 
 1. Visit the platform : [Stock Simulator](https://stock-simulator-beta.vercel.app/)
+    ![Landing Page](./screenshots/landing.png)
+
 2. Create an account / Use the demo account
     - Click on sign up for creating an account
     - Or use continue with Google
     - Demo account credentials : ```username:demo@example.com; password: 12345678```
     - Log In
+
+    ![Login/SignUp](./screenshots/login.png)
+
 3. Go the Portfolio (/dashboard)
     - Here, you can look at your account value, holdings, trade history and market trends. You can use embedded links for navigation.
+    ![Portfolio](./screenshots/portfolio.png)
+
+
 4. Go to stock lookup (/research)
     - Here, you will find popular stocks and a search bar. You can click on a stock to lookup more information about it and access its price and trend chart.
     - From this dialog box, you'll be able to add the stock to watchlist or access it on the trading page.
+    ![Stock Lookup](./screenshots/stocklookup.png)
+    ![Stock Info](./screenshots/stockinfo.png)
+
+
 5. Go to Trade Page (/trade)
     - This is the page where you actually make trades. Search for a stock in the search bar and select it. The page will give you the overview for the share. For more information, go to the stock lookup option.
     - You have 4 actions available in trading as of now - Buy-Sell and Short-Buy to Cover.
@@ -55,8 +67,15 @@ Make an account or use the demo : ```demo@example.com; password: 12345678```
     - The way is short selling a stock. A stock is short sold when we think that it will go down in price. In a crude way, you borrow shares of that stock and sell them at current market price. Then you buy back the shares at some later time at the then price. So, if the stock went down, you sell higher and buy lower, you make a profit margin. If the price were to go up, we'd have to buy them at a higher price and end up losing money. Most shorts are allowed intraday, but here you can keep them for as long as you want. Additionally, since shorts are actually borrowing the shares, there are some restrictions on their trade - like you need to have money >= 150% of the stock value in your account. Although this seems unkind, it is necessary to guarantee fulfillment in case of loss. And since short selling is mostly the only way to make money from lowering prices.
     - Making a trade is simple, select the stock, what you want to do and how many stocks you want. The platform will calculate the total amount and ask for confirmation.
     - El viola, you've made a trade albeit virtual but you've dipped your feet in the ocean called the stock market.
+
+    ![Trade Page](./screenshots/trade.png)
+    ![Trade Confirmation Page](./screenshots/tradeConf.png)
+
+
 6. Watchlist (/watchlist)
     - This is the page where you can pin out some stocks and observe them with convenience. Add a stock to the watchlist from the stock lookup page and it will show up here. The watchlist shows you the price at which you marked a stock and the price it is currently trading at. It also gives you option to remove a stock from the list or go to the trading page for that stock.
+
+    ![Watchlist](./screenshots/watchlist.png)
 
 ## Some difference from the actual stock market. 
 - The platform is limited to stocks only which goes to say that, as of now, the platform does not support futures and options trading which are derivatives built upon stocks.
